@@ -1,0 +1,6 @@
+name: ServerAPIPaper
+version: '${project.version}'
+main: de.jrninj.serverapipaper.ServerAPI
+api-version: 1.17
+authors: [ JRNinj, TimeTravelStudios ]
+description: Official Server API (Paper) of TimeTravelStudios
