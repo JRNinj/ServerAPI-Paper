@@ -4,8 +4,6 @@ import de.jrninj.serverapipaper.utils.YMLFile;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.IOException;
-
 public class PlayerData {
 
     public static String getUUID(String username) {
