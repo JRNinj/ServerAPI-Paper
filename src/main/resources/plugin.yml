@@ -1,4 +1,4 @@
-name: ServerAPIPaper
+name: ServerAPI
 version: '${project.version}'
 main: de.jrninj.serverapipaper.ServerAPI
 api-version: 1.17

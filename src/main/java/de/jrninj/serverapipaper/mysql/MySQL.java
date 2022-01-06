@@ -12,6 +12,8 @@ public class MySQL {
 
     private static Connection connection;
 
+    //Info
+
     public static String getMySQLHost() {
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.getMessagesFile());
 
@@ -72,6 +74,8 @@ public class MySQL {
         return config.getString("Information.MySQL Port");
     }
 
+    //Connection
+
     public static void connect() {
         if (!isConnected()) {
             try {
@@ -115,6 +119,10 @@ public class MySQL {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
 }

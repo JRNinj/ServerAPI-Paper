@@ -1,5 +1,6 @@
 package de.jrninj.serverapipaper;
 
+import de.jrninj.serverapipaper.listener.JoinListener;
 import de.jrninj.serverapipaper.mysql.MySQL;
 import de.jrninj.serverapipaper.utils.YMLFile;
 import org.bukkit.Bukkit;
@@ -16,6 +17,8 @@ public final class ServerAPI extends JavaPlugin {
         plugin = this;
 
         YMLFile.fileCreations();
+
+        register();
 
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.primalConfig);
         if(config.getBoolean("Settings.MySQL")) {
@@ -36,6 +39,10 @@ public final class ServerAPI extends JavaPlugin {
 
         Bukkit.getConsoleSender().sendMessage(getPrefix() + "§cDie ServerAPI wurde deaktiviert!");
 
+    }
+
+    private void register() {
+        Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
     }
 
     public static ServerAPI getPlugin() {
