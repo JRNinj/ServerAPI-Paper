@@ -1,5 +1,7 @@
 package de.jrninj.serverapipaper;
 
+import de.jrninj.serverapipaper.coins.PlayerManager;
+import de.jrninj.serverapipaper.commands.*;
 import de.jrninj.serverapipaper.listener.JoinListener;
 import de.jrninj.serverapipaper.mysql.MySQL;
 import de.jrninj.serverapipaper.utils.YMLFile;
@@ -11,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class ServerAPI extends JavaPlugin {
 
     private static ServerAPI plugin;
+    private PlayerManager playerManager;
 
     @Override
     public void onEnable() {
@@ -23,7 +26,8 @@ public final class ServerAPI extends JavaPlugin {
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.primalConfig);
         if(config.getBoolean("Settings.MySQL")) {
             MySQL.connect();
-        }
+        } else
+            Bukkit.getConsoleSender().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
 
         Bukkit.getConsoleSender().sendMessage(getPrefix() + "§2Die ServerAPI wurde erfolgreich aktiviert!");
 
@@ -42,7 +46,23 @@ public final class ServerAPI extends JavaPlugin {
     }
 
     private void register() {
+        //Other Stuff
+        playerManager = new PlayerManager();
+
+        //Listener
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+
+        //Commands
+        Bukkit.getPluginCommand("pay").setExecutor(new PayCMD());
+        Bukkit.getPluginCommand("pay").setExecutor(new PayCMD());
+        Bukkit.getPluginCommand("euro").setExecutor(new EuroCMD());
+        Bukkit.getPluginCommand("euro").setExecutor(new EuroCMD());
+        Bukkit.getPluginCommand("coins").setExecutor(new CoinsCMD());
+        Bukkit.getPluginCommand("coins").setExecutor(new CoinsCMD());
+        Bukkit.getPluginCommand("money").setExecutor(new MoneyCMD());
+        Bukkit.getPluginCommand("money").setExecutor(new MoneyCMD());
+        Bukkit.getPluginCommand("info").setExecutor(new InfoCMD());
+        Bukkit.getPluginCommand("info").setExecutor(new InfoCMD());
     }
 
     public static ServerAPI getPlugin() {
@@ -53,11 +73,15 @@ public final class ServerAPI extends JavaPlugin {
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.getMessagesFile());
 
         if(config.get("Messages.Server Prefix") == null) {
-            return "§5Shulker§Games §0>> §7";
+            return "§5Shulker§6Games §0>> §7";
         }
 
         String s = config.getString("Messages.Server Prefix");
         s = s.replace("&", "§");
         return s;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }

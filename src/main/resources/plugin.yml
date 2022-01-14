@@ -4,3 +4,20 @@ main: de.jrninj.serverapipaper.ServerAPI
 api-version: 1.17
 authors: [ JRNinj, TimeTravelStudios ]
 description: Official Server API (Paper) of TimeTravelStudios
+
+commands:
+  pay:
+    description: Mit diesem Befehl kannst du Geld an einen anderen Spieler bezahlen --> /pay [Name] [Amount] [Euro/Coins]
+    permission: serverapi.pay
+  euro:
+    description: Mit diesem Befehl kannst du den Kontostand eines Spielers verändern --> /euro [Name] [set/add/remove] [Amount]
+    permission: serverapi.euro
+  coins:
+    description: Mit diesem Befehl kannst du den Kontostand eines Spielers verändern --> /coins [Name] [set/add/remove] [Amount]
+    permission: serverapi.coins
+  money:
+    description: Mit diesem Befehl kannst du den Kontostand eines Spielers verändern --> /coins [Name] [set/add/remove] [Amount] [Euros/Coins]
+    permission: serverapi.money
+  info:
+    description: Mit diesem Befehl kannst du dir den Kontostand und andere Daten von einem Spieler anzeigen lassen --> /info [Name]
+    permission: serverapi.info

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class MySQL {
@@ -83,6 +84,7 @@ public class MySQL {
                 Bukkit.getConsoleSender().sendMessage(ServerAPI.getPrefix() + "§2Die MySQL Verbindung wurde erfolgreich hergestellt!");
             } catch (SQLException e) {
                 Bukkit.getConsoleSender().sendMessage(ServerAPI.getPrefix() + "§4Bei der Verbindung zur MySQL Datenbank ist ein Fehler aufgetreten §7--> bitte üperprüfe ob deine Datenbank gestartet und alle Werte richtig in die Config eingegeben wurden!");
+                Bukkit.getServer().shutdown();
             }
         }
     }
@@ -125,4 +127,9 @@ public class MySQL {
         return connection;
     }
 
+    //Other
+
+    public static Boolean isEnabled() {
+        return YamlConfiguration.loadConfiguration(YMLFile.primalConfig).getBoolean("Settings.MySQL");
+    }
 }

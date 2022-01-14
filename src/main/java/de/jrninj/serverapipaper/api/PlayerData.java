@@ -17,14 +17,14 @@ public class PlayerData {
 
         }
 
-        return "§4The Username not exist in our system!";
+        return null;
     }
 
     public static String getUsername(String uuid) {
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.getFile());
 
         if(!config.contains("Players." + uuid + ".name")) {
-            return "§4The UUID not exist in our system!";
+            return null;
         }
 
         return config.getString("Players." + uuid + ".name");

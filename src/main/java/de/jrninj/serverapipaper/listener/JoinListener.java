@@ -15,6 +15,7 @@ public class JoinListener implements Listener {
     @EventHandler
     public void postLogin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        e.setJoinMessage(null);
 
         FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.getFile());
 
