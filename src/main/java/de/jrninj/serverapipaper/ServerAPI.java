@@ -1,13 +1,15 @@
 package de.jrninj.serverapipaper;
 
+import de.jrninj.serverapipaper.api.PlayerData;
 import de.jrninj.serverapipaper.coins.PlayerManager;
 import de.jrninj.serverapipaper.commands.*;
-import de.jrninj.serverapipaper.listener.JoinListener;
+import de.jrninj.serverapipaper.listener.PlayerDataListener;
 import de.jrninj.serverapipaper.mysql.MySQL;
 import de.jrninj.serverapipaper.utils.YMLFile;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ServerAPI extends JavaPlugin {
@@ -50,7 +52,7 @@ public final class ServerAPI extends JavaPlugin {
         playerManager = new PlayerManager();
 
         //Listener
-        Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDataListener(), this);
 
         //Commands
         Bukkit.getPluginCommand("pay").setExecutor(new PayCMD());
