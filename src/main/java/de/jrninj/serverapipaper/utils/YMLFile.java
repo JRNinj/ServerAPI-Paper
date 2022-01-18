@@ -39,18 +39,13 @@ public class YMLFile {
                 Files.createDirectories(saveDirectory);
             }
 
-            //File
-            if (!getFile().exists()) {
-                getFile().createNewFile();
-            }
-
             //Messages
             if (!getMessagesFile().exists()) {
                 getMessagesFile().createNewFile();
 
                 FileConfiguration config = YamlConfiguration.loadConfiguration(getMessagesFile());
 
-                config.set("Messages.Server Prefix", "§5Shulker§6Games §0>> §7");
+                config.set("Messages.Server Prefix", "§5Shulker§Games §0>> §7");
                 config.set("Messages.Keine Rechte (Fehler)", "&4Dafür hast du keine Rechte!");
                 config.set("Information.MySQL Host", "xxx.mysql.de");
                 config.set("Information.MySQL Port", "3306");
@@ -65,10 +60,6 @@ public class YMLFile {
             ex.printStackTrace();
         }
 
-    }
-
-    public static File getFile() {
-        return new File(ServerAPI.getPlugin().getDataFolder().getPath() + YamlConfiguration.loadConfiguration(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "players.yml");
     }
 
     public static File getMessagesFile() {

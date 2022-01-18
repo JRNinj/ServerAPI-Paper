@@ -3,6 +3,7 @@ package de.jrninj.serverapipaper.commands;
 import de.jrninj.serverapipaper.ServerAPI;
 import de.jrninj.serverapipaper.api.PlayerData;
 import de.jrninj.serverapipaper.coins.CustomPlayer;
+import de.jrninj.serverapipaper.mysql.MySQL;
 import de.jrninj.serverapipaper.utils.YMLFile;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,6 +16,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -197,12 +201,21 @@ public class PayCMD implements CommandExecutor, TabCompleter {
 
         ArrayList<String> tc = new ArrayList<>();
         if(args.length == 1) {
-            FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.getFile());
+            try {
+                PreparedStatement statement = MySQL.getConnection().prepareStatement("SELECT USERNAME FROM `players`;");
+                statement.executeQuery();
 
-            for (String uuid : config.getConfigurationSection("Players").getKeys(false)) {
-                tc.add(config.getString("Players." + uuid + ".name"));
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    tc.add(resultSet.getString("USERNAME"));
+                }
+
+                return tc.stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            return tc.stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
         } else if (args.length == 2) {
             tc.add("5");
             tc.add("10");
