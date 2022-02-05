@@ -151,8 +151,7 @@ public class MoneyCMD implements CommandExecutor, TabCompleter {
 
                     sender.sendMessage(ServerAPI.getPrefix() + "§7§l|| Spieler: §6" + player.getName() + "\n" +
                             ServerAPI.getPrefix() + "§7§l|| Coins: §2" + customTarget.getCoins() + "\n" +
-                            ServerAPI.getPrefix() + "§7§l|| Euro: §2" + customTarget.getEuros() + "\n" +
-                            ServerAPI.getPrefix() + "§7§l|| Spielt seit dem §6" + customTarget.getFirstTimeJoined());
+                            ServerAPI.getPrefix() + "§7§l|| Euro: §2" + customTarget.getEuros());
 
                 } else
                     sender.sendMessage(ServerAPI.getPrefix() + "§4Diesen Befehl kann nur ein Spieler verwenden!");
