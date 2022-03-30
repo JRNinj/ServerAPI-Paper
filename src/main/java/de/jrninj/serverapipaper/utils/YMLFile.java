@@ -18,7 +18,7 @@ public class YMLFile {
 
         try {
             if (!ServerAPI.getPlugin().getDataFolder().exists()) {
-                ServerAPI.getPlugin().getDataFolder().mkdir();
+                ServerAPI.getPlugin().getDataFolder().mkdirs();
             }
 
             //Primal Config
@@ -28,15 +28,7 @@ public class YMLFile {
                 FileConfiguration config = YamlConfiguration.loadConfiguration(primalConfig);
                 config.set("Settings.MySQL", false);
 
-                config.set("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)", "/../../configs");
-
                 config.save(primalConfig);
-            }
-
-            //Create Directory
-            Path saveDirectory = Paths.get(ServerAPI.getPlugin().getDataFolder().getPath() + YamlConfiguration.loadConfiguration(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"));
-            if (!Files.exists(saveDirectory)) {
-                Files.createDirectories(saveDirectory);
             }
 
             //Messages
@@ -63,6 +55,6 @@ public class YMLFile {
     }
 
     public static File getMessagesFile() {
-        return new File(ServerAPI.getPlugin().getDataFolder().getPath() + YamlConfiguration.loadConfiguration(primalConfig).getString("Paths.Speicherpfad (vom ServerAPI Pluginordner ausgesehen)"), "messages.yml");
+        return new File(ServerAPI.getPlugin().getDataFolder().getPath(), "messages.yml");
     }
 }

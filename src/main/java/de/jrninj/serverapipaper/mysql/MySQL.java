@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 
 public class MySQL {
 
@@ -132,4 +133,27 @@ public class MySQL {
     public static Boolean isEnabled() {
         return YamlConfiguration.loadConfiguration(YMLFile.primalConfig).getBoolean("Settings.MySQL");
     }
+
+    //Reconnect Sessions
+
+    public static void startSession() {
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(ServerAPI.getPlugin(), new Runnable() {
+            @Override
+            public void run() {
+
+                FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.primalConfig);
+                if(config.getBoolean("Settings.MySQL")) {
+                    if (isConnected()) {
+                        disconnect();
+                    }
+                    connect();
+                } else
+                    Bukkit.getConsoleSender().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
+
+            }
+        }, 0, 20*86400);
+
+    }
+
 }

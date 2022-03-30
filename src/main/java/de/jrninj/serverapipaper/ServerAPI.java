@@ -33,11 +33,7 @@ public final class ServerAPI extends JavaPlugin {
 
         register();
 
-        FileConfiguration config = YamlConfiguration.loadConfiguration(YMLFile.primalConfig);
-        if(config.getBoolean("Settings.MySQL")) {
-            MySQL.connect();
-        } else
-            Bukkit.getConsoleSender().sendMessage(ServerAPI.getPrefix() + "§4MySQL ist derzeit deaktiviert, gehe in die Config um es zu aktivieren!");
+        MySQL.startSession();
 
         Bukkit.getConsoleSender().sendMessage(getPrefix() + "§2Die ServerAPI wurde erfolgreich aktiviert!");
 
